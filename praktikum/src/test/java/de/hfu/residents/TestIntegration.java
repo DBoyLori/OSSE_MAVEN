@@ -46,12 +46,16 @@ public class TestIntegration {
 			filteredMList = residentService.getFilteredResidentsList(emptyResident);
 			assertThat(filteredMList.isEmpty(), equalTo(true));
 			
-			Resident oneResident = new Resident ("*", "*", "Flugplatzstr.*", "*", null);
+			Resident oneResident = new Resident ("*", "*", "Flugplatzstr.*", "*", null );
 			filteredMList = residentService.getFilteredResidentsList(oneResident);
 			assertThat(filteredMList.get(0).getGivenName(), equalTo("Kevin"));
 			assertThat(filteredMList.get(1).getGivenName(), equalTo("Max"));
 			assertThat(filteredMList.size(), equalTo(2));
 			
+			@SuppressWarnings("deprecation")
+			Resident dateResident = new Resident ("*", "*", "*", "*", new Date(1994,5,16));
+			filteredMList = residentService.getFilteredResidentsList(dateResident);
+			assertThat(filteredMList.get(0).getGivenName(), equalTo("Michael"));
 			
 			
 		}
